@@ -15,20 +15,23 @@ const init = () => {
   style('style.css')
   style('maplibre-gl.css')
   script('maplibre-gl.js')
-  const map = document.createElement('div')
-  map.id = 'map'
-  document.body.appendChild(map)
+
+  const inputs = document.getElementById('menu').getElementsByTagName('input');
+  for (const input of inputs) {
+    input.onclick = (layer) => {
+      map.setStyle(layer.target.id)
+    }
+  }
 }
 init()
 
+let map
 const showMap = async (texts) => {
-  const map = new maplibregl.Map({
+  map = new maplibregl.Map({
     container: 'map',
     hash: true,
     style: 'style.json',
-    center: [39.541, -69.019],
-    zoom: 11.77,
-    maxZoom: 18
+    maxZoom: 18.6
   })
   map.addControl(new maplibregl.NavigationControl())
   map.addControl(new maplibregl.ScaleControl({
@@ -45,47 +48,34 @@ const showMap = async (texts) => {
     ].includes(v.name)) voice = v
   }
 
-  const legend = {
-    0: 'created, never classified',
-    1: 'unclassified',
-    2: 'ground',
-    3: 'low vegetation',
-    4: 'medium vegetation',
-    5: 'high vegetation',
-    6: 'building',
-    7: 'low point, or low noise',
-    8: 'high point, typically high noise',
-    9: 'water',
-    10: 'rail',
-    11: 'road surface',
-    12: 'bridge deck',
-    13: 'wire, guard',
-    14: 'wire, conductor',
-    15: 'transmission tower',
-    16: 'wire-structure connector, such as insulator'
-  }
-
   map.on('load', () => {
-    map.on('click', 'voxel', (e) => {
+    map.on('click', 'voxel', e => {
       let u = new SpeechSynthesisUtterance()
       u.lang = 'en-GB'
-      u.text = legend[e.features[0].properties.classification]
-      if (!u.text) u.text = 'reserved or user definable.'
+      u.text = 'a voxel of ' + e.features[0].properties.spacing + 'meters.'
       if (voice) u.voice = voice
       speechSynthesis.cancel()
       speechSynthesis.speak(u)
     })
-
+    map.on('click', 'grid', e => {
+      let u = new SpeechSynthesisUtterance()
+      u.lang = 'ja-JP'
+      u.text = e.features[0].properties.MESH_NO
+      //speechSynthesis.cancel()
+      //speechSynthesis.speak(u)
+    })
+    map.on('moveend', e => {
+      let fs = map.queryRenderedFeatures(
+	[window.innerWidth / 2, window.innerHeight / 2], 
+        { layers : ['voxel'] }
+      )
+      if (fs.length == 0) return
+      let height = fs[0].properties.h 
+      console.log(height)
+    })
   })
 }
 
-const main = async () => {
-  if (typeof maplibregl == 'undefined') {
-    window.onload = () => {
-      showMap()
-    }
-  } else {
-    showMap()
-  }
+window.onload = () => {
+  showMap()
 }
-main()
