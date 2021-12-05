@@ -91,9 +91,13 @@
           "h"
         ],
         "fill-extrusion-color": [
-          "interpolate-hcl",
+          "interpolate-lab",
           [
-            "linear"
+            "cubic-bezier",
+            0,
+            0.5,
+            1,
+            0.5
           ],
           [
             "%",

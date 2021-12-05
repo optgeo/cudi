@@ -7,8 +7,12 @@ paint:
     - get
     - h
   fill-extrusion-color:
-    - interpolate-hcl
-    - - linear
+    - interpolate-lab
+    - - cubic-bezier
+      - 0
+      - 0.5
+      - 1
+      - 0.5 
     - - "%"
       - - "+"
         - - "/"
