@@ -7,8 +7,14 @@ paint:
     - get
     - h
   fill-extrusion-color:
-    - get
-    - color
+    - interpolate-hcl
+    - - linear
+    - - get
+      - h
+    - 0.0
+    - "#f00"
+    - 300.0
+    - "#00f"
   fill-extrusion-opacity:
     - interpolate
     - - linear

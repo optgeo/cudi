@@ -91,8 +91,18 @@
           "h"
         ],
         "fill-extrusion-color": [
-          "get",
-          "color"
+          "interpolate-hcl",
+          [
+            "linear"
+          ],
+          [
+            "get",
+            "h"
+          ],
+          0,
+          "#f00",
+          300,
+          "#00f"
         ],
         "fill-extrusion-opacity": [
           "interpolate",
