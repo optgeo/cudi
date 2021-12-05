@@ -12,9 +12,19 @@ paint:
     - - get
       - h
     - 0.0
-    - "#f00"
-    - 300.0
-    - "#00f"
+    - red
+    - 25.0
+    - blue
+    - 50.0
+    - red
+    - 75.0
+    - blue
+    - 100.0
+    - red
+    - 125.0
+    - blue
+    - 150.0
+    - red
   fill-extrusion-opacity:
     - interpolate
     - - linear

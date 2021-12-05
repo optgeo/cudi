@@ -100,9 +100,19 @@
             "h"
           ],
           0,
-          "#f00",
-          300,
-          "#00f"
+          "red",
+          25,
+          "blue",
+          50,
+          "red",
+          75,
+          "blue",
+          100,
+          "red",
+          125,
+          "blue",
+          150,
+          "red"
         ],
         "fill-extrusion-opacity": [
           "interpolate",

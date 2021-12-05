@@ -1,5 +1,5 @@
-task :default do
-  sh "charites build style.yaml docs/style.json"
+task :style do
+  sh "charites build style.yml docs/style.json"
 end
 
 task :host do
