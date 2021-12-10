@@ -14,7 +14,7 @@ sources:
     type: vector
     attribution: 出典:静岡県ポイントクラウドデータベース
     minzoom: 10
-    maxzoom: 18
+    maxzoom: 19
     tiles:
       - https://x.optgeo.org/kid-c/zxy/{z}/{x}/{y}.pbf
   adm:

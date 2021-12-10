@@ -31,7 +31,7 @@ const showMap = async (texts) => {
     container: 'map',
     hash: true,
     style: 'style.json',
-    maxZoom: 18.6
+    maxZoom: 19.6
   })
   map.addControl(new maplibregl.NavigationControl())
   map.addControl(new maplibregl.ScaleControl({
